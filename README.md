@@ -1,70 +1,99 @@
-# Getting Started with Create React App
+# 📋 Gerenciador de Tarefas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Checklist diário organizador de tarefas desenvolvido em **React JS** para a disciplina de **Linguagem de Programação para Internet**.
 
-## Available Scripts
+![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-CDN-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+![Yarn](https://img.shields.io/badge/Yarn-Package_Manager-2C8EBB?style=flat-square&logo=yarn&logoColor=white)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📖 Sobre o Projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+O **Gerenciador de Tarefas** é uma *Single Page Application* (SPA) desenvolvida com o objetivo de consolidar a arquitetura moderna de interfaces reativas no front-end utilizando **React JS**. A aplicação permite organizar atividades diárias de forma prática, responsiva e sem recarregamento de página, operando sobre a **Virtual DOM** para atualizações rápidas e eficientes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ✨ Funcionalidades
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Adição de Tarefas:** Formulário controlado com validação inline que impede o cadastro de tarefas vazias e limpa o campo automaticamente após a inclusão.
+- **Controle de Conclusão:** Caixa de seleção (*checkbox*) personalizada que alterna o status entre **Pendente** e **Concluída**, aplicando estilização visual (texto riscado e etiqueta de status).
+- **Exclusão de Tarefas:** Botão discreto em cada item para remover tarefas da lista.
+- **Filtragem Dinâmica por Status:** Abas interativas (**Todas**, **Pendentes** e **Concluídas**) acompanhadas de contadores atualizados em tempo real.
+- **Alternância de Tema:** Botão **Mudar tema** no cabeçalho que alterna a paleta de cores da interface entre **Verde-Água** e **Azul-Marinho** via variáveis CSS.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🧠 Conceitos e Arquitetura Aplicados
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+O código foi estruturado seguindo as boas práticas de engenharia de front-end com React:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Componentização e Reusabilidade:** Interface dividida em componentes funcionais autônomos e com responsabilidades bem definidas (`App`, `ListaDeTarefas`, `Tarefa` e `TaskProvider`).
+- **Gerenciamento de Estado Global (`Context API`):** Uso combinado de `createContext`, `useContext` e `useReducer` em um hook customizado (`useTasks`) para centralizar tarefas, filtro ativo e tema, evitando *prop drilling*.
+- **Imutabilidade de Dados:** Todas as operações de estado (`ADD_TASK`, `TOGGLE_TASK`, `REMOVE_TASK`, `SET_FILTER` e `TOGGLE_THEME`) geram novas referências em memória usando o operador *spread* (`...`), `.map()` e `.filter()`, sem mutar o estado original.
+- **Componentes Controlados e Eventos:** Sincronização bidirecional de formulários com `useState`, tratamento de eventos em *camelCase* (`onSubmit`, `onChange`, `onClick`) e prevenção de comportamento padrão do navegador com `e.preventDefault()`.
+- **Reconciliação Otimizada:** Uso obrigatório da propriedade única `key={tarefa.id}` nas renderizações dinâmicas de listas com `.map()`.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📁 Estrutura de Pastas
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```text
+gerenciador-de-tarefas/
+├── public/
+│   └── index.html               # Estrutura HTML base, fonte Inter e Tailwind CSS
+├── src/
+│   ├── components/
+│   │   ├── ListaDeTarefas.js    # Filtragem dinâmica e listagem com .map()
+│   │   └── Tarefa.js            # Item individual com checkbox, badge e exclusão
+│   ├── context/
+│   │   └── TaskContext.js       # Estado global (useContext + useReducer + tema)
+│   ├── App.js                   # Componente raiz, cabeçalho, formulário e abas
+│   ├── index.css                # Variáveis CSS dos temas e estilos utilitários
+│   └── index.js                 # Ponto de entrada da aplicação React
+├── package.json                 # Dependências e scripts do projeto
+├── yarn.lock                    # Árvore exata de dependências gerenciada pelo Yarn
+└── README.md                    # Documentação do projeto
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🚀 Como Executar o Projeto Localmente
 
-## Learn More
+### Pré-requisitos
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Certifique-se de ter instalados em sua máquina:
+- [Node.js](https://nodejs.org/) (versão LTS)
+- [Yarn](https://yarnpkg.com/)
+- [Git](https://git-scm.com/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Passo a passo
 
-### Code Splitting
+```bash
+# 1. Clone este repositório
+git clone [https://github.com/nalbs/gerenciador-de-tarefas.git](https://github.com/nalbs/gerenciador-de-tarefas.git)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# 2. Acesse a pasta do projeto
+cd gerenciador-de-tarefas
 
-### Analyzing the Bundle Size
+# 3. Instale todas as dependências declaradas no package.json
+yarn
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# 4. Inicie o servidor local de desenvolvimento
+yarn start
+```
 
-### Making a Progressive Web App
+Após executar `yarn start`, a aplicação estará disponível no navegador em `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Para gerar a versão otimizada de produção:
 
-### Advanced Configuration
+```bash
+yarn build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 👨‍💻 Autor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Desenvolvido por **Nalberth Dutra** — Trabalho Final da disciplina de **Linguagem de Programação para Internet**.
